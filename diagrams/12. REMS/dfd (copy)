@@ -1,0 +1,91 @@
+
+@startuml
+
+!define ICONURL https://raw.githubusercontent.com/jaime-olivares/yuml-diagram/master/doc/icons/
+!define ICON(name) <img:ICONURL{name}.png>
+
+!define HEADER <b><&color#red&>Real Estate System</&></b>
+
+!define OWNER_ICON ICON(owner)
+!define BUYER_ICON ICON(buyer)
+!define ADMIN_ICON ICON(admin)
+
+!define PROPERTY_ICON ICON(building)
+!define APPOINTMENT_ICON ICON(calendar)
+!define QUESTION_ICON ICON(question)
+!define COMPLAINT_ICON ICON(complaint)
+!define PAYMENT_ICON ICON(pay)
+!define USER_ICON ICON(user)
+
+!define DATABASE_ICON ICON(database)
+
+!define ACTOR_STYLE <<(M,white)>>
+
+!define ROUND_RECT_STYLE <<(R,#lightgray)>>
+!define RECT_STYLE <<(R,#white)>>
+
+!define ARROW_STYLE -[#blue]-&gt;
+
+!define DB_ARROW_STYLE -[#green]-&gt;
+
+skinparam actor {
+    BackgroundColor White
+}
+
+skinparam rectangle {
+    BackgroundColor white
+}
+
+actor Owner as o
+actor Buyer as b
+actor Admin as a
+
+rectangle "Property Data Store" as PropertyStore 
+rectangle "Appointment Data Store" as AppointmentStore 
+rectangle "Question Data Store" as QuestionStore 
+rectangle "Complaint Data Store" as ComplaintStore 
+rectangle "Payment Data Store" as PaymentStore
+rectangle "User Data Store" as UserStore 
+
+o --> rectangle "Create Property"
+o --> "View Appointments"
+o --> "View Questions"
+o --> "View Complaints"
+o --> "Enter Payment Details"
+o --> "Log In"
+o --> "Log Out"
+
+b --> "Book Appointment"
+b --> "Ask Questions"
+b --> "Complain"
+b --> "Register"
+b --> "Log In"
+b --> "Log Out"
+
+a --> "View and Reply to Complaints"
+a --> "Log In"
+a --> "Log Out"
+
+"Create Property" --> PropertyStore : Property Details
+"View Appointments" --> AppointmentStore : Appointments
+"View Questions" --> QuestionStore : Questions
+"View Complaints" --> ComplaintStore : Complaints
+"Enter Payment Details" --> PaymentStore : Payment Details
+"Log In" --> UserStore : User Credentials
+"Log Out" --> UserStore : User
+"Register" --> UserStore : User Registration
+
+"Book Appointment" --> AppointmentStore : Appointment Details
+"Ask Questions" --> QuestionStore : Question Details
+"Complain" --> ComplaintStore : Complaint Details
+"View and Reply to Complaints" --> "Admin Data Store" : Admin Actions
+
+PropertyStore --> "Property"
+AppointmentStore --> "Appointment"
+QuestionStore --> "Question"
+ComplaintStore --> "Complaint"
+PaymentStore --> "Payment"
+UserStore --> "User"
+
+@enduml
+
